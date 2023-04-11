@@ -1,0 +1,24 @@
+{
+  "name": "to_make_sandwich",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "android": "react-native run-android",
+    "lint": "eslint .",
+    "start": "react-native start"
+  },
+  "dependencies": {
+    "react": "18.2.0",
+    "react-native": "0.71.4"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.0",
+    "@babel/preset-env": "^7.20.0",
+    "@babel/runtime": "^7.20.0",
+    "@react-native-community/eslint-config": "^3.2.0",
+    "eslint": "^8.19.0",
+    "eslint-config-prettier": "^8.8.0",
+    "metro-react-native-babel-preset": "0.73.8",
+    "prettier": "^2.4.1"
+  }
+}
