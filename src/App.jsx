@@ -1,16 +1,20 @@
-import React from 'react'
-import { SafeAreaView, ScrollView, StatusBar, StyleSheet } from 'react-native'
+import React, { useEffect } from 'react'
+import { ScrollView, StatusBar, StyleSheet, View } from 'react-native'
+import changeNavigationBarColor from 'react-native-navigation-bar-color'
 
 import ToMakeSandwich from './ToMakeSandwich'
 
 export default function App() {
+  useEffect(() => {
+    changeNavigationBarColor('#a091ce')
+  }, [])
   return (
-    <SafeAreaView>
+    <View>
       <StatusBar barStyle={'light-content'} backgroundColor={'#a091ce'} />
       <ScrollView style={style.app}>
         <ToMakeSandwich />
       </ScrollView>
-    </SafeAreaView>
+    </View>
   )
 }
 
