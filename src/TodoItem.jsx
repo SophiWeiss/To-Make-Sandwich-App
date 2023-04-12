@@ -10,7 +10,7 @@ import { colors } from './colors'
 
 function TodoData({ text, date, done }) {
   const dateColorStyle = {
-    color: date < Date.now() && !done ? '#b3287b' : '#8282ba'
+    color: date < Date.now() && !done ? colors.textWarning : colors.textLight
   }
   const lineThroughStyle = {
     textDecorationLine: done ? 'line-through' : 'none'
@@ -118,7 +118,7 @@ export default function TodoItem({
 const style = StyleSheet.create({
   todoItem: {
     flexDirection: 'row',
-    backgroundColor: '#d8cef1',
+    backgroundColor: colors.backgroundLighter,
     padding: 16,
     paddingLeft: 20,
     paddingRight: 20,
@@ -129,7 +129,7 @@ const style = StyleSheet.create({
     fontSize: 18,
     flex: 1,
     padding: 10,
-    backgroundColor: '#f1eeff',
+    backgroundColor: colors.backgroundLight,
     borderRadius: 7,
     marginRight: 10
   },
@@ -155,14 +155,15 @@ const style = StyleSheet.create({
     borderRadius: 5
   },
   todoButtonText: {
+    color: 'white',
     fontSize: 18
   },
   button1: {
-    backgroundColor: '#d074d7',
+    backgroundColor: colors.buttonPink,
     borderBottomRightRadius: 0,
     borderTopRightRadius: 0
   },
   button2: {
-    backgroundColor: '#7e74d7'
+    backgroundColor: colors.buttonPurple
   }
 })

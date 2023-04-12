@@ -7,14 +7,14 @@ import { colors } from './colors'
 
 export default function App() {
   useEffect(() => {
-    changeNavigationBarColor(colors.background)
+    changeNavigationBarColor(colors.backgroundDark)
   }, [])
 
   return (
     <View>
       <StatusBar
         barStyle={'light-content'}
-        backgroundColor={colors.background}
+        backgroundColor={colors.backgroundDark}
       />
       <ScrollView style={style.app}>
         <ToMakeSandwich />
@@ -25,7 +25,7 @@ export default function App() {
 
 const style = StyleSheet.create({
   app: {
-    backgroundColor: colors.background,
+    backgroundColor: colors.backgroundDark,
     height: '100%'
   }
 })
