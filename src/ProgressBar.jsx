@@ -10,18 +10,24 @@ export default function ProgressBar({ progress }) {
 
   return (
     <View style={style.progressBarBackground}>
-      <View style={style.progressBar(progress, RGBArray)} />
+      <View
+        style={[
+          style.progressBar,
+          {
+            width: `${100 * progress}%`,
+            backgroundColor: `rgb(${RGBArray})`
+          }
+        ]}
+      />
     </View>
   )
 }
 
 const style = StyleSheet.create({
-  progressBar: (progress, RGBArray) => ({
+  progressBar: {
     height: 10,
-    borderRadius: 5,
-    width: `${100 * progress}%`,
-    backgroundColor: `rgb(${RGBArray})`
-  }),
+    borderRadius: 5
+  },
   progressBarBackground: {
     backgroundColor: 'white',
     height: 20,
