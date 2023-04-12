@@ -155,6 +155,7 @@ const style = StyleSheet.create({
     borderRadius: 5
   },
   todoButtonText: {
+    color: 'white',
     fontSize: 18
   },
   button1: {
