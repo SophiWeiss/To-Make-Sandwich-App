@@ -1,5 +1,6 @@
 import React from 'react'
 import { StyleSheet, View, Text } from 'react-native'
+import { colors } from './colors'
 
 export default function ToMakeSandwich() {
   return (
@@ -14,7 +15,7 @@ const style = StyleSheet.create({
     margin: 20
   },
   title: {
-    color: '#36395a',
+    color: colors.textDark,
     fontSize: 32,
     fontWeight: 'bold',
     padding: 30,
