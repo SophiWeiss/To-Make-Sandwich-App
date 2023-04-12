@@ -2,9 +2,12 @@ import React from 'react'
 import { StyleSheet, View } from 'react-native'
 
 export default function ProgressBar({ progress }) {
-  let RGBArray1 = [238, 132, 215].map(x => progress * x)
-  let RGBArray2 = [142, 223, 252].map(x => (1 - progress) * x)
-  let RGBArray = Array.from({ length: 3 }).map(
+  const colorStart = [238, 132, 215]
+  const colorEnd = [142, 223, 252]
+
+  const RGBArray1 = colorStart.map(x => progress * x)
+  const RGBArray2 = colorEnd.map(x => (1 - progress) * x)
+  const RGBArray = Array.from({ length: 3 }).map(
     (_, index) => RGBArray1[index] + RGBArray2[index]
   )
 
