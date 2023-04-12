@@ -7,7 +7,7 @@ export default function ToMakeSandwich() {
   return (
     <View style={style.toMakeSandwich}>
       <Text style={style.title}>My To-Do-Sandwich</Text>
-      <ProgressBar progress={1} />
+      <ProgressBar progress={0.2} />
     </View>
   )
 }
