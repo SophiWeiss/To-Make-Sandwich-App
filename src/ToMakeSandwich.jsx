@@ -1,4 +1,5 @@
 import React from 'react'
+import ProgressBar from './ProgressBar'
 import { StyleSheet, View, Text } from 'react-native'
 import { colors } from './colors'
 
@@ -6,6 +7,7 @@ export default function ToMakeSandwich() {
   return (
     <View style={style.toMakeSandwich}>
       <Text style={style.title}>My To-Do-Sandwich</Text>
+      <ProgressBar progress={1} />
     </View>
   )
 }
