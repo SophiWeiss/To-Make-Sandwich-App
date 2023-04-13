@@ -7,6 +7,10 @@ import {
   View
 } from 'react-native'
 import { colors } from './colors'
+import ButtonsTuple from './ButtonsTuple'
+import XCircleFill from './svg/XCircleFill'
+import PenFill from './svg/PenFill'
+import Save2Fill from './svg/Save2Fill'
 
 function TodoData({ text, date, done }) {
   const dateColorStyle = {
@@ -21,44 +25,9 @@ function TodoData({ text, date, done }) {
       <Text style={[style.text, lineThroughStyle]}>{text}</Text>
       {date !== null && (
         <Text numberOfLines={1} style={[style.date, dateColorStyle]}>
-          {new Date(date).toLocaleString().slice(0, -3)}
+          {new Date(date).toLocaleDateString()}
         </Text>
       )}
-    </View>
-  )
-}
-
-function TodoButtons({
-  id,
-  text1,
-  text2,
-  showFirst = true,
-  onPress1,
-  onPress2
-}) {
-  const dynamicBorderRadiusStyle = {
-    borderBottomLeftRadius: showFirst ? 0 : 5,
-    borderTopLeftRadius: showFirst ? 0 : 5
-  }
-
-  return (
-    <View style={style.todoButtons}>
-      {showFirst && (
-        <TouchableOpacity
-          id={id}
-          style={[style.todoButton, style.button1]}
-          onPress={onPress1}
-        >
-          <Text style={style.todoButtonText}>{text1}</Text>
-        </TouchableOpacity>
-      )}
-      <TouchableOpacity
-        id={id}
-        style={[style.todoButton, style.button2, dynamicBorderRadiusStyle]}
-        onPress={onPress2}
-      >
-        <Text style={style.todoButtonText}>{text2}</Text>
-      </TouchableOpacity>
     </View>
   )
 }
@@ -80,15 +49,16 @@ export default function TodoItem({
     <TouchableOpacity
       id={id}
       style={style.todoItem}
+      activeOpacity={0.8}
       onPress={editValue === null ? onPress : null}
     >
       {editValue === null ? (
         <>
           <TodoData {...{ text, date, done }} />
-          <TodoButtons
+          <ButtonsTuple
             id={id}
-            text1={'Edit'}
-            text2={'Delete'}
+            button1={<PenFill />}
+            button2={<XCircleFill />}
             showFirst={!done}
             onPress1={onEditButtonPress}
             onPress2={onDeleteButtonPress}
@@ -100,12 +70,13 @@ export default function TodoItem({
             id={id}
             value={editValue}
             onChangeText={onEditInputChange}
+            onSubmitEditing={() => onSaveButtonPress(id)}
             style={style.editInput}
           />
-          <TodoButtons
+          <ButtonsTuple
             id={id}
-            text1={'Save'}
-            text2={'Cancel'}
+            button1={<Save2Fill />}
+            button2={<XCircleFill />}
             onPress1={onSaveButtonPress}
             onPress2={onCancelButtonPress}
           />
@@ -119,51 +90,26 @@ const style = StyleSheet.create({
   todoItem: {
     flexDirection: 'row',
     backgroundColor: colors.backgroundLighter,
-    padding: 16,
-    paddingLeft: 20,
-    paddingRight: 20,
+    padding: 20,
     alignItems: 'center'
   },
   editInput: {
-    color: colors.textDark,
-    fontSize: 18,
     flex: 1,
     padding: 10,
     backgroundColor: colors.backgroundLight,
     borderRadius: 7,
-    marginRight: 10
+    fontSize: 19,
+    color: colors.textDark
   },
   todoData: {
     flex: 1
   },
   text: {
     color: colors.textDark,
-    fontSize: 18,
+    fontSize: 19,
     marginRight: 4
   },
   date: {
     fontSize: 11
-  },
-  todoButtons: {
-    flexDirection: 'row',
-    marginLeft: 10
-  },
-  todoButton: {
-    padding: 5,
-    paddingLeft: 7,
-    paddingRight: 7,
-    borderRadius: 5
-  },
-  todoButtonText: {
-    color: 'white',
-    fontSize: 18
-  },
-  button1: {
-    backgroundColor: colors.buttonPink,
-    borderBottomRightRadius: 0,
-    borderTopRightRadius: 0
-  },
-  button2: {
-    backgroundColor: colors.buttonPurple
   }
 })

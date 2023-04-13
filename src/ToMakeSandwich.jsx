@@ -1,37 +1,31 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import ProgressBar from './ProgressBar'
-import { StyleSheet, View, Text, TextInput } from 'react-native'
+import {
+  StyleSheet,
+  View,
+  Text,
+  ScrollView,
+  KeyboardAvoidingView
+} from 'react-native'
 import { colors } from './colors'
+import 'react-native-get-random-values'
 import { nanoid } from 'nanoid'
 import TodoItem from './TodoItem'
+import InputSection from './InputSection'
 
 export default function ToMakeSandwich() {
-  const [todos, setTodos] = useState([
-    {
-      id: '0',
-      text: 'Uika 1',
-      date: Date.now(),
-      done: false,
-      editValue: null
-    },
-    {
-      id: '1',
-      text: 'Uika 2',
-      date: null,
-      done: false,
-      editValue: null
-    }
-  ])
+  const [todos, setTodos] = useState([])
   const [inputValue, setInputValue] = useState('')
-  const [deadlineValue, setDeadlineValue] = useState('')
+  const [deadlineValue, setDeadlineValue] = useState(null)
+  const listRef = useRef(null)
 
   const appendTodos = () => {
     setTodos(prevTodos => [
       ...prevTodos,
       {
         id: nanoid(),
-        text: inputValue,
-        date: deadlineValue !== '' ? new Date(deadlineValue).getTime() : null,
+        text: inputValue.trim(),
+        date: deadlineValue,
         done: false,
         editValue: null
       }
@@ -39,9 +33,9 @@ export default function ToMakeSandwich() {
   }
 
   const handleAddButtonClick = () => {
-    if (inputValue.trim().length !== 0) appendTodos()
+    if (inputValue.trim() !== '') appendTodos()
     setInputValue('')
-    setDeadlineValue('')
+    setDeadlineValue(null)
   }
 
   const toggleDone = id => {
@@ -70,10 +64,8 @@ export default function ToMakeSandwich() {
         todo.id === id
           ? {
               ...todo,
-              text:
-                todo.editValue.trim().length === 0 ? todo.text : todo.editValue,
-              editValue:
-                todo.editValue.trim().length === 0 ? todo.editValue : null
+              text: todo.editValue.trim() === '' ? todo.text : todo.editValue,
+              editValue: todo.editValue.trim() === '' ? todo.editValue : null
             }
           : todo
       )
@@ -114,20 +106,35 @@ export default function ToMakeSandwich() {
   const dynamicMarginBottomStyle = { marginBottom: todos.length === 0 ? 0 : 20 }
 
   return (
-    <View style={style.toMakeSandwich}>
+    <KeyboardAvoidingView style={style.toMakeSandwich}>
       <Text style={style.title}>My To-Do-Sandwich</Text>
       <ProgressBar progress={progress} />
       <View style={[style.todoList, dynamicMarginBottomStyle]}>
-        {todoElements}
+        <ScrollView
+          ref={listRef}
+          keyboardShouldPersistTaps={'handled'}
+          onContentSizeChange={() =>
+            listRef.current.scrollToEnd({ animated: true })
+          }
+        >
+          {todoElements}
+        </ScrollView>
       </View>
-      <TextInput />
-    </View>
+      <InputSection
+        onInputChange={setInputValue}
+        onDeadlineChange={(e, date) => setDeadlineValue(date)}
+        onAddButtonPress={handleAddButtonClick}
+        inputValue={inputValue}
+        deadlineValue={deadlineValue}
+      />
+    </KeyboardAvoidingView>
   )
 }
 
 const style = StyleSheet.create({
   toMakeSandwich: {
-    margin: 20
+    margin: 20,
+    flex: 1
   },
   title: {
     color: colors.textDark,
@@ -141,6 +148,7 @@ const style = StyleSheet.create({
     borderBottomRightRadius: 10
   },
   todoList: {
+    flexShrink: 1,
     borderRadius: 10,
     overflow: 'hidden'
   }
