@@ -70,6 +70,7 @@ export default function TodoItem({
             id={id}
             value={editValue}
             onChangeText={onEditInputChange}
+            onSubmitEditing={() => onSaveButtonPress(id)}
             style={style.editInput}
           />
           <ButtonsTuple
