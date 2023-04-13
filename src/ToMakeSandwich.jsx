@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import ProgressBar from './ProgressBar'
 import { StyleSheet, View, Text, TextInput } from 'react-native'
 import { colors } from './colors'
+import 'react-native-get-random-values'
 import { nanoid } from 'nanoid'
 import TodoItem from './TodoItem'
 
