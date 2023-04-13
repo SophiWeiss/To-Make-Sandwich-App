@@ -40,8 +40,7 @@ export default function ButtonsTuple({
 const style = StyleSheet.create({
   buttonsTuple: {
     flexDirection: 'row',
-    marginLeft: 10,
-    alignSelf: 'stretch'
+    marginLeft: 10
   },
   button: {
     padding: 14,
