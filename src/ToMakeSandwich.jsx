@@ -1,6 +1,12 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import ProgressBar from './ProgressBar'
-import { StyleSheet, View, Text, TextInput } from 'react-native'
+import {
+  StyleSheet,
+  View,
+  Text,
+  ScrollView,
+  KeyboardAvoidingView
+} from 'react-native'
 import { colors } from './colors'
 import 'react-native-get-random-values'
 import { nanoid } from 'nanoid'
@@ -100,11 +106,19 @@ export default function ToMakeSandwich() {
   const dynamicMarginBottomStyle = { marginBottom: todos.length === 0 ? 0 : 20 }
 
   return (
-    <View style={style.toMakeSandwich}>
+    <KeyboardAvoidingView style={style.toMakeSandwich}>
       <Text style={style.title}>My To-Do-Sandwich</Text>
       <ProgressBar progress={progress} />
       <View style={[style.todoList, dynamicMarginBottomStyle]}>
-        {todoElements}
+        <ScrollView
+          ref={listRef}
+          keyboardShouldPersistTaps={'handled'}
+          onContentSizeChange={() =>
+            listRef.current.scrollToEnd({ animated: true })
+          }
+        >
+          {todoElements}
+        </ScrollView>
       </View>
       <InputSection
         onInputChange={setInputValue}
@@ -119,7 +133,8 @@ export default function ToMakeSandwich() {
 
 const style = StyleSheet.create({
   toMakeSandwich: {
-    margin: 20
+    margin: 20,
+    flex: 1
   },
   title: {
     color: colors.textDark,
@@ -133,6 +148,7 @@ const style = StyleSheet.create({
     borderBottomRightRadius: 10
   },
   todoList: {
+    flexShrink: 1,
     borderRadius: 10,
     overflow: 'hidden'
   }

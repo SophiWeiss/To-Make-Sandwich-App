@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { ScrollView, StatusBar, StyleSheet, View } from 'react-native'
+import { StatusBar, View, StyleSheet } from 'react-native'
 import changeNavigationBarColor from 'react-native-navigation-bar-color'
 
 import ToMakeSandwich from './ToMakeSandwich'
@@ -16,16 +16,15 @@ export default function App() {
         barStyle={'light-content'}
         backgroundColor={colors.backgroundDark}
       />
-      <ScrollView style={style.app}>
+      <View style={style.app}>
         <ToMakeSandwich />
-      </ScrollView>
+      </View>
     </View>
   )
 }
 
 const style = StyleSheet.create({
   app: {
-    backgroundColor: colors.backgroundDark,
     height: '100%'
   }
 })
