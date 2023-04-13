@@ -1,23 +1,54 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import ProgressBar from './ProgressBar'
 import {
   StyleSheet,
   View,
   Text,
   ScrollView,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  Alert
 } from 'react-native'
 import { colors } from './colors'
 import 'react-native-get-random-values'
 import { nanoid } from 'nanoid'
 import TodoItem from './TodoItem'
 import InputSection from './InputSection'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 export default function ToMakeSandwich() {
+  const todosStorageKey = '@todos'
   const [todos, setTodos] = useState([])
   const [inputValue, setInputValue] = useState('')
   const [deadlineValue, setDeadlineValue] = useState(null)
   const listRef = useRef(null)
+
+  useEffect(() => {
+    const readTodos = async () => {
+      try {
+        const jsonTodos = await AsyncStorage.getItem(todosStorageKey)
+        setTodos(jsonTodos !== null ? JSON.parse(jsonTodos) : [])
+      } catch (e) {
+        Alert.alert('An error occured while reading todos', `${e}`, [
+          { text: 'OK' }
+        ])
+      }
+    }
+    readTodos().then()
+  }, [])
+
+  useEffect(() => {
+    const storeTodos = async () => {
+      try {
+        const jsonTodos = JSON.stringify(todos)
+        await AsyncStorage.setItem(todosStorageKey, jsonTodos)
+      } catch (e) {
+        Alert.alert('An error occured while storing todos', `${e}`, [
+          { text: 'OK' }
+        ])
+      }
+    }
+    storeTodos().then()
+  }, [todos])
 
   const appendTodos = () => {
     setTodos(prevTodos => [
