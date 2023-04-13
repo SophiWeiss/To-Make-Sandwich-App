@@ -11,8 +11,8 @@ export default function ButtonsTuple({
   onPress2
 }) {
   const dynamicBorderRadiusStyle = {
-    borderBottomLeftRadius: showFirst ? 0 : 5,
-    borderTopLeftRadius: showFirst ? 0 : 5
+    borderBottomLeftRadius: showFirst ? 0 : 7,
+    borderTopLeftRadius: showFirst ? 0 : 7
   }
 
   return (
