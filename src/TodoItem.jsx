@@ -49,6 +49,7 @@ export default function TodoItem({
     <TouchableOpacity
       id={id}
       style={style.todoItem}
+      activeOpacity={0.8}
       onPress={editValue === null ? onPress : null}
     >
       {editValue === null ? (
@@ -88,26 +89,23 @@ const style = StyleSheet.create({
   todoItem: {
     flexDirection: 'row',
     backgroundColor: colors.backgroundLighter,
-    padding: 16,
-    paddingLeft: 20,
-    paddingRight: 20,
+    padding: 20,
     alignItems: 'center'
   },
   editInput: {
-    color: colors.textDark,
-    fontSize: 18,
     flex: 1,
     padding: 10,
     backgroundColor: colors.backgroundLight,
     borderRadius: 7,
-    marginRight: 10
+    fontSize: 19,
+    color: colors.textDark
   },
   todoData: {
     flex: 1
   },
   text: {
     color: colors.textDark,
-    fontSize: 18,
+    fontSize: 19,
     marginRight: 4
   },
   date: {
