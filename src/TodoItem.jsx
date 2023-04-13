@@ -25,7 +25,7 @@ function TodoData({ text, date, done }) {
       <Text style={[style.text, lineThroughStyle]}>{text}</Text>
       {date !== null && (
         <Text numberOfLines={1} style={[style.date, dateColorStyle]}>
-          {new Date(date).toLocaleString().slice(0, -3)}
+          {new Date(date).toLocaleDateString()}
         </Text>
       )}
     </View>
