@@ -36,6 +36,7 @@ export default function ToMakeSandwich() {
     if (inputValue.trim() !== '') appendTodos()
     setInputValue('')
     setDeadlineValue(null)
+    listRef.current.scrollToEnd({ animated: true })
   }
 
   const toggleDone = id => {
@@ -110,13 +111,7 @@ export default function ToMakeSandwich() {
       <Text style={style.title}>My To-Do-Sandwich</Text>
       <ProgressBar progress={progress} />
       <View style={[style.todoList, dynamicMarginBottomStyle]}>
-        <ScrollView
-          ref={listRef}
-          keyboardShouldPersistTaps={'handled'}
-          onContentSizeChange={() =>
-            listRef.current.scrollToEnd({ animated: true })
-          }
-        >
+        <ScrollView ref={listRef} keyboardShouldPersistTaps={'handled'}>
           {todoElements}
         </ScrollView>
       </View>
