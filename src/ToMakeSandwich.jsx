@@ -63,7 +63,7 @@ export default function ToMakeSandwich() {
     ])
   }
 
-  const handleAddButtonClick = () => {
+  const handleAddButtonPress = () => {
     if (inputValue.trim() !== '') appendTodos()
     setInputValue('')
     setDeadlineValue(null)
@@ -120,6 +120,11 @@ export default function ToMakeSandwich() {
     )
   }
 
+  const updateDeadlineValue = (e, date) => {
+    if (e.type === 'dismissed') setDeadlineValue(null)
+    else if (e.type === 'set') setDeadlineValue(date)
+  }
+
   const todoElements = todos.map(todo => (
     <TodoItem
       {...todo}
@@ -148,8 +153,8 @@ export default function ToMakeSandwich() {
       </View>
       <InputSection
         onInputChange={setInputValue}
-        onDeadlineChange={(e, date) => setDeadlineValue(date)}
-        onAddButtonPress={handleAddButtonClick}
+        onDeadlineChange={updateDeadlineValue}
+        onAddButtonPress={handleAddButtonPress}
         inputValue={inputValue}
         deadlineValue={deadlineValue}
       />

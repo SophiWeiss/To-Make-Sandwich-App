@@ -6,9 +6,11 @@ export default function ButtonsTuple({
   id,
   button1,
   button2,
-  showFirst = true,
   onPress1,
-  onPress2
+  onPress2,
+  showFirst = true,
+  style1 = null,
+  style2 = null
 }) {
   const dynamicBorderRadiusStyle = {
     borderBottomLeftRadius: showFirst ? 0 : 7,
@@ -20,7 +22,7 @@ export default function ButtonsTuple({
       {showFirst && (
         <TouchableOpacity
           id={id}
-          style={[style.button, style.button1]}
+          style={[style.button, style.button1, style1]}
           onPress={onPress1}
         >
           {button1}
@@ -28,7 +30,7 @@ export default function ButtonsTuple({
       )}
       <TouchableOpacity
         id={id}
-        style={[style.button, style.button2, dynamicBorderRadiusStyle]}
+        style={[style.button, style.button2, style2, dynamicBorderRadiusStyle]}
         onPress={onPress2}
       >
         {button2}

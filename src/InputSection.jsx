@@ -25,7 +25,12 @@ export default function InputSection({
         onSubmitEditing={() => onAddButtonPress()}
       />
       <ButtonsTuple
-        button1={<CallendarEventFill />}
+        style1={!deadlineValue && { backgroundColor: colors.backgroundLight }}
+        button1={
+          <CallendarEventFill
+            fill={deadlineValue ? 'white' : colors.textLight}
+          />
+        }
         button2={<PlusCircleFill />}
         onPress1={() => {
           DateTimePickerAndroid.open({
