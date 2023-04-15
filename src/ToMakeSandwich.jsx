@@ -56,7 +56,7 @@ export default function ToMakeSandwich() {
       {
         id: nanoid(),
         text: inputValue.trim(),
-        date: deadlineValue,
+        date: deadlineValue.toISOString(),
         done: false,
         editValue: null
       }
@@ -120,9 +120,17 @@ export default function ToMakeSandwich() {
     )
   }
 
-  const updateDeadlineValue = (e, date) => {
-    if (e.type === 'dismissed') setDeadlineValue(null)
-    else if (e.type === 'set') setDeadlineValue(date)
+  const updateDeadlineValue = (e, date, mode) => {
+    if (e.type === 'dismissed') {
+      setDeadlineValue(null)
+    } else if (mode === 'date') {
+      setDeadlineValue(date)
+    } else if (mode === 'time') {
+      setDeadlineValue(
+        prevDate =>
+          new Date(prevDate.setHours(date.getHours(), date.getMinutes(), 0))
+      )
+    }
   }
 
   const todoElements = todos.map(todo => (

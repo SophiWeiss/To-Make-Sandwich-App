@@ -29,7 +29,10 @@ function TodoData({ text, date, done }) {
       <Text style={[style.text, lineThroughStyle]}>{text}</Text>
       {date !== null && (
         <Text numberOfLines={1} style={[style.date, dateColorStyle]}>
-          {new Date(date).toLocaleDateString()}
+          {new Date(date).toLocaleDateString([], {
+            hour: '2-digit',
+            minute: '2-digit'
+          })}
         </Text>
       )}
     </View>
