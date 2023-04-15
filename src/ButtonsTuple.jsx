@@ -10,15 +10,11 @@ export default function ButtonsTuple({
   onPress2,
   showFirst = true,
   style1 = null,
-  style2 = null
+  style2 = null,
+  flexDirection = 'row'
 }) {
-  const dynamicBorderRadiusStyle = {
-    borderBottomLeftRadius: showFirst ? 0 : 7,
-    borderTopLeftRadius: showFirst ? 0 : 7
-  }
-
   return (
-    <View style={style.buttonsTuple}>
+    <View style={[style.buttonsTuple, { flexDirection }]}>
       {showFirst && (
         <TouchableOpacity
           id={id}
@@ -30,7 +26,7 @@ export default function ButtonsTuple({
       )}
       <TouchableOpacity
         id={id}
-        style={[style.button, style.button2, style2, dynamicBorderRadiusStyle]}
+        style={[style.button, style.button2, style2]}
         onPress={onPress2}
       >
         {button2}
@@ -41,20 +37,18 @@ export default function ButtonsTuple({
 
 const style = StyleSheet.create({
   buttonsTuple: {
-    flexDirection: 'row',
-    marginLeft: 10
+    marginLeft: 10,
+    borderRadius: 7,
+    overflow: 'hidden'
   },
   button: {
     padding: 14,
     paddingLeft: 15,
     paddingRight: 15,
-    borderRadius: 7,
     justifyContent: 'center'
   },
   button1: {
-    backgroundColor: colors.buttonPink,
-    borderBottomRightRadius: 0,
-    borderTopRightRadius: 0
+    backgroundColor: colors.buttonPink
   },
   button2: {
     backgroundColor: colors.buttonPurple
