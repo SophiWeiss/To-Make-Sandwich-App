@@ -1,7 +1,7 @@
 import React from 'react'
 import Svg, { Path } from 'react-native-svg'
 
-const CallendarEventFill = props => {
+const CalendarEventFill = props => {
   return (
     <Svg
       xmlns="http://www.w3.org/2000/svg"
@@ -15,4 +15,4 @@ const CallendarEventFill = props => {
     </Svg>
   )
 }
-export default CallendarEventFill
+export default CalendarEventFill

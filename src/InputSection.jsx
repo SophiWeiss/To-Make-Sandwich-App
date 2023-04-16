@@ -2,7 +2,7 @@ import React, { useRef } from 'react'
 import { TextInput, StyleSheet, View, Keyboard } from 'react-native'
 import { colors } from './colors'
 import { DateTimePickerAndroid } from '@react-native-community/datetimepicker'
-import CallendarEventFill from './svg/CallendarEventFill'
+import CalendarEventFill from './svg/CalendarEventFill'
 import ButtonsTuple from './ButtonsTuple'
 import PlusCircleFill from './svg/PlusCircleFill'
 
@@ -47,7 +47,7 @@ export default function InputSection({
       <ButtonsTuple
         style1={!deadlineValue && { backgroundColor: colors.backgroundLight }}
         button1={
-          <CallendarEventFill
+          <CalendarEventFill
             fill={deadlineValue ? 'white' : colors.textLight}
           />
         }
