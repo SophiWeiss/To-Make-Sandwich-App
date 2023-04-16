@@ -27,7 +27,7 @@ function TodoData({ text, date, done }) {
   return (
     <View style={style.todoData}>
       <Text style={[style.text, lineThroughStyle]}>{text}</Text>
-      {date !== null && (
+      {date !== undefined && (
         <Text numberOfLines={1} style={[style.date, dateColorStyle]}>
           {new Date(date).toLocaleDateString([], {
             hour: '2-digit',

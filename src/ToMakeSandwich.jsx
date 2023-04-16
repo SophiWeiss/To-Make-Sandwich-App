@@ -56,7 +56,7 @@ export default function ToMakeSandwich() {
       {
         id: nanoid(),
         text: inputValue.trim(),
-        date: deadlineValue.toISOString(),
+        date: deadlineValue?.toISOString(),
         done: false,
         editValue: null
       }
