@@ -1,5 +1,5 @@
-import React from 'react'
-import { TextInput, StyleSheet, View } from 'react-native'
+import React, { useRef } from 'react'
+import { TextInput, StyleSheet, View, Keyboard } from 'react-native'
 import { colors } from './colors'
 import { DateTimePickerAndroid } from '@react-native-community/datetimepicker'
 import CallendarEventFill from './svg/CallendarEventFill'
@@ -13,9 +13,29 @@ export default function InputSection({
   onAddButtonPress,
   onDeadlineChange
 }) {
+  const inputRef = useRef(null)
+
+  const updateDateTimePicker = (e, date, mode) => {
+    onDeadlineChange(e, date, mode)
+    if (e.type === 'set') {
+      if (mode === 'date') openDateTimePicker('time')
+      if (mode === 'time') setTimeout(() => inputRef.current.focus(), 200)
+    }
+  }
+
+  const openDateTimePicker = mode => {
+    Keyboard.dismiss()
+    DateTimePickerAndroid.open({
+      value: deadlineValue === null ? new Date() : deadlineValue,
+      onChange: (e, date) => updateDateTimePicker(e, date, mode),
+      mode
+    })
+  }
+
   return (
     <View style={style.inputSection}>
       <TextInput
+        ref={inputRef}
         style={style.textInput}
         placeholder={'What u wanna do?'}
         placeholderTextColor={colors.textLight}
@@ -25,15 +45,14 @@ export default function InputSection({
         onSubmitEditing={() => onAddButtonPress()}
       />
       <ButtonsTuple
-        button1={<CallendarEventFill />}
+        style1={!deadlineValue && { backgroundColor: colors.backgroundLight }}
+        button1={
+          <CallendarEventFill
+            fill={deadlineValue ? 'white' : colors.textLight}
+          />
+        }
         button2={<PlusCircleFill />}
-        onPress1={() => {
-          DateTimePickerAndroid.open({
-            value: deadlineValue === null ? new Date() : deadlineValue,
-            onChange: onDeadlineChange,
-            mode: 'date'
-          })
-        }}
+        onPress1={() => openDateTimePicker('date')}
         onPress2={onAddButtonPress}
       />
     </View>

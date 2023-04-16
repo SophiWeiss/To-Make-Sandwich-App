@@ -14,8 +14,12 @@ import Save2Fill from './svg/Save2Fill'
 
 function TodoData({ text, date, done }) {
   const dateColorStyle = {
-    color: date < Date.now() && !done ? colors.textWarning : colors.textLight
+    color:
+      new Date(date) < new Date() && !done
+        ? colors.textWarning
+        : colors.textLight
   }
+
   const lineThroughStyle = {
     textDecorationLine: done ? 'line-through' : 'none'
   }
@@ -23,9 +27,12 @@ function TodoData({ text, date, done }) {
   return (
     <View style={style.todoData}>
       <Text style={[style.text, lineThroughStyle]}>{text}</Text>
-      {date !== null && (
+      {date !== undefined && (
         <Text numberOfLines={1} style={[style.date, dateColorStyle]}>
-          {new Date(date).toLocaleDateString()}
+          {new Date(date).toLocaleDateString([], {
+            hour: '2-digit',
+            minute: '2-digit'
+          })}
         </Text>
       )}
     </View>
